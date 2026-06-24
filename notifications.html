@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyMate AI | Notifications</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:root{--bg:#050816;--border:rgba(255,255,255,.13);--muted:#9aa8c7;--blue:#4f8cff;--cyan:#35e7ff;--purple:#8f5bff;--green:#43f5b6;--yellow:#ffd166}
+body{min-height:100vh;background:radial-gradient(circle at 10% 0%,rgba(79,140,255,.26),transparent 34%),radial-gradient(circle at 90% 10%,rgba(143,91,255,.22),transparent 34%),#050816;color:white}
+a{text-decoration:none;color:inherit}.app{width:min(900px,92%);margin:0 auto;padding:24px 0 110px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}.logo{display:flex;align-items:center;gap:12px;font-size:23px;font-weight:900}.logo-mark{width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple))}
+.back-btn{padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.07);font-weight:800}
+.hero,.note{background:rgba(255,255,255,.075);border:1px solid var(--border);border-radius:34px;backdrop-filter:blur(24px);box-shadow:0 28px 90px rgba(0,0,0,.35)}
+.hero{padding:34px;margin-bottom:20px}.badge{display:inline-flex;padding:10px 15px;border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:13px;margin-bottom:20px}
+h1{font-size:clamp(40px,6vw,64px);line-height:.95;letter-spacing:-.08em;margin-bottom:16px}.gradient{background:linear-gradient(135deg,#fff,#9bc3ff,#57f0ff);-webkit-background-clip:text;color:transparent}p{color:var(--muted);line-height:1.7}
+.note{padding:20px;margin-bottom:14px}.note strong{display:block;margin-bottom:8px}.note span{display:block;color:var(--muted);font-size:13px;line-height:1.6}.pill{display:inline-flex;margin-top:12px;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:900;background:rgba(67,245,182,.12);border:1px solid rgba(67,245,182,.2);color:var(--green)}.pill.warn{background:rgba(255,209,102,.12);border-color:rgba(255,209,102,.2);color:var(--yellow)}
+.bottom-nav{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);width:min(620px,92%);background:rgba(7,12,28,.82);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(25px);border-radius:28px;padding:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.nav-btn{text-align:center;border-radius:20px;padding:12px 8px;color:var(--muted);font-size:12px;font-weight:850}.nav-btn.active{color:#06101f;background:linear-gradient(135deg,var(--blue),var(--cyan)}
+@media(max-width:540px){.back-btn{display:none}.hero,.note{border-radius:28px;padding:24px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><a href="student-dashboard.html" class="logo"><span class="logo-mark"></span><span>StudyMate AI</span></a><a href="student-dashboard.html" class="back-btn">Back</a></header>
+<section class="hero"><div class="badge">Notifications</div><h1>Stay updated <span class="gradient">always.</span></h1><p>Class reminders, assignment alerts, teacher announcements, download updates, and AI study reminders appear here.</p></section>
+
+<div class="note"><strong>New Assignment Published</strong><span>Quadratic Equations assignment is due Friday by 11:59 PM.</span><span class="pill warn">Assignment Alert</span></div>
+<div class="note"><strong>Live Class Starting Soon</strong><span>Physics SS2 class starts today by 4:00 PM.</span><span class="pill">Class Reminder</span></div>
+<div class="note"><strong>New Material Uploaded</strong><span>Physics Wave Notes is now available in Downloads.</span><span class="pill">Material Update</span></div>
+<div class="note"><strong>Study Planner Reminder</strong><span>Revise wave speed, frequency, and wavelength today.</span><span class="pill">Study Reminder</span></div>
+</div>
+
+<nav class="bottom-nav">
+<a class="nav-btn" href="student-dashboard.html">Home</a><a class="nav-btn" href="join-class.html">Classes</a><a class="nav-btn" href="assignments.html">Tasks</a><a class="nav-btn active" href="notifications.html">Alerts</a><a class="nav-btn" href="profile.html">Profile</a>
+</nav>
+</body>
+</html>
