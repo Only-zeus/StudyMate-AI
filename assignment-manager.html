@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyMate AI | Assignment Manager</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+:root{
+--bg:#050816;
+--card:rgba(255,255,255,.08);
+--border:rgba(255,255,255,.12);
+--text:#fff;
+--muted:#9aa8c7;
+--blue:#4f8cff;
+--cyan:#35e7ff;
+--purple:#8f5bff;
+--green:#43f5b6;
+--yellow:#ffd166;
+}
+
+body{
+background:
+radial-gradient(circle at 10% 0%,rgba(79,140,255,.25),transparent 35%),
+radial-gradient(circle at 90% 10%,rgba(143,91,255,.22),transparent 35%),
+#050816;
+color:white;
+min-height:100vh;
+}
+
+.app{
+width:min(1180px,92%);
+margin:auto;
+padding:24px 0 110px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:24px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:22px;
+font-weight:900;
+}
+
+.logo-box{
+width:42px;
+height:42px;
+border-radius:14px;
+background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple));
+}
+
+.back-btn{
+padding:12px 18px;
+border-radius:999px;
+border:1px solid var(--border);
+background:rgba(255,255,255,.08);
+text-decoration:none;
+color:white;
+font-weight:800;
+}
+
+.hero{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:20px;
+margin-bottom:20px;
+}
+
+.card{
+background:rgba(255,255,255,.07);
+border:1px solid var(--border);
+border-radius:30px;
+padding:28px;
+backdrop-filter:blur(20px);
+}
+
+.badge{
+display:inline-flex;
+padding:10px 14px;
+border-radius:999px;
+background:rgba(255,255,255,.08);
+margin-bottom:20px;
+font-size:13px;
+font-weight:800;
+}
+
+h1{
+font-size:56px;
+line-height:.95;
+margin-bottom:16px;
+}
+
+.gradient{
+background:linear-gradient(135deg,#fff,#9bc3ff,#57f0ff);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+p{
+color:var(--muted);
+line-height:1.7;
+}
+
+.form-grid{
+display:grid;
+gap:12px;
+margin-top:18px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:16px;
+border:none;
+border-radius:18px;
+background:rgba(255,255,255,.08);
+color:white;
+}
+
+textarea{
+resize:none;
+height:120px;
+}
+
+select option{
+background:#0b1024;
+}
+
+.btn{
+border:none;
+padding:15px;
+border-radius:999px;
+font-weight:900;
+cursor:pointer;
+}
+
+.primary{
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+color:#06101f;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.assignment{
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.1);
+padding:20px;
+border-radius:24px;
+}
+
+.assignment strong{
+display:block;
+font-size:17px;
+margin-bottom:10px;
+}
+
+.assignment span{
+display:block;
+font-size:13px;
+color:var(--muted);
+line-height:1.6;
+margin-bottom:14px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.pill{
+padding:8px 12px;
+border-radius:999px;
+font-size:12px;
+font-weight:900;
+background:rgba(67,245,182,.12);
+border:1px solid rgba(67,245,182,.2);
+color:var(--green);
+}
+
+.pill.pending{
+background:rgba(255,209,102,.12);
+border-color:rgba(255,209,102,.2);
+color:var(--yellow);
+}
+
+.status{
+margin-top:12px;
+font-size:14px;
+color:#dce6ff;
+}
+
+.bottom-nav{
+position:fixed;
+left:50%;
+bottom:18px;
+transform:translateX(-50%);
+width:min(620px,92%);
+background:rgba(7,12,28,.82);
+border:1px solid rgba(255,255,255,.14);
+backdrop-filter:blur(25px);
+border-radius:28px;
+padding:12px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+}
+
+.nav-btn{
+text-align:center;
+padding:12px;
+border-radius:18px;
+text-decoration:none;
+color:var(--muted);
+font-size:12px;
+font-weight:800;
+}
+
+.active{
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+color:#06101f;
+}
+
+@media(max-width:900px){
+.hero,.grid{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+<div class="logo">
+<div class="logo-box"></div>
+<span>StudyMate AI</span>
+</div>
+
+<a href="teacher-dashboard.html" class="back-btn">
+Back
+</a>
+
+</header>
+
+<section class="hero">
+
+<div class="card">
+
+<div class="badge">
+Assignment Manager
+</div>
+
+<h1>
+Create
+<span class="gradient">
+Assignments
+</span>
+</h1>
+
+<p>
+Create classroom assignments, set deadlines,
+and allow students to submit directly through StudyMate.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 style="margin-bottom:15px;">
+New Assignment
+</h2>
+
+<div class="form-grid">
+
+<input id="title" placeholder="Assignment Title">
+
+<select id="classroom">
+<option value="">Select Classroom</option>
+<option>Physics SS2</option>
+<option>Mathematics Revision</option>
+<option>Chemistry Class</option>
+</select>
+
+<input id="deadline" type="date">
+
+<textarea
+id="instructions"
+placeholder="Assignment Instructions">
+</textarea>
+
+<button class="btn primary"
+onclick="createAssignment()">
+Publish Assignment
+</button>
+
+<div class="status" id="status">
+Assignments will appear below.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="grid"
+id="assignmentList">
+
+<div class="assignment">
+
+<strong>
+Wave Motion Assignment
+</strong>
+
+<span>
+Physics SS2 • Deadline Friday
+</span>
+
+<div class="row">
+<div class="pill">
+Published
+</div>
+</div>
+
+</div>
+
+<div class="assignment">
+
+<strong>
+Quadratic Equations
+</strong>
+
+<span>
+Mathematics Revision • Deadline Monday
+</span>
+
+<div class="row">
+<div class="pill pending">
+Pending Review
+</div>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<nav class="bottom-nav">
+
+<a class="nav-btn"
+href="teacher-dashboard.html">
+Home
+</a>
+
+<a class="nav-btn"
+href="materials.html">
+Files
+</a>
+
+<a class="nav-btn active"
+href="assignment-manager.html">
+Tasks
+</a>
+
+<a class="nav-btn"
+href="classroom.html">
+Live
+</a>
+
+<a class="nav-btn"
+href="#">
+More
+</a>
+
+</nav>
+
+<script>
+
+function createAssignment(){
+
+const title =
+document.getElementById("title").value;
+
+const classroom =
+document.getElementById("classroom").value;
+
+const deadline =
+document.getElementById("deadline").value;
+
+const status =
+document.getElementById("status");
+
+if(!title || !classroom){
+
+status.textContent =
+"Please complete all required fields.";
+
+return;
+
+}
+
+const card =
+document.createElement("div");
+
+card.className =
+"assignment";
+
+card.innerHTML = `
+<strong>${title}</strong>
+<span>${classroom} • Deadline ${deadline}</span>
+<div class="row">
+<div class="pill">Published</div>
+</div>
+`;
+
+document
+.getElementById("assignmentList")
+.prepend(card);
+
+status.textContent =
+"Assignment published successfully.";
+
+document.getElementById("title").value="";
+document.getElementById("classroom").value="";
+document.getElementById("deadline").value="";
+document.getElementById("instructions").value="";
+}
+
+</script>
+
+</body>
+</html>
