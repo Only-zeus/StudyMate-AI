@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyMate AI | Profile</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:root{--bg:#050816;--border:rgba(255,255,255,.13);--muted:#9aa8c7;--blue:#4f8cff;--cyan:#35e7ff;--purple:#8f5bff;--green:#43f5b6}
+body{min-height:100vh;background:radial-gradient(circle at 10% 0%,rgba(79,140,255,.26),transparent 34%),radial-gradient(circle at 90% 10%,rgba(143,91,255,.22),transparent 34%),#050816;color:white}
+a{text-decoration:none;color:inherit}.app{width:min(900px,92%);margin:0 auto;padding:24px 0 110px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}.logo{display:flex;align-items:center;gap:12px;font-size:23px;font-weight:900}.logo-mark{width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple))}
+.back-btn{padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.07);font-weight:800}
+.card{background:rgba(255,255,255,.075);border:1px solid var(--border);border-radius:34px;backdrop-filter:blur(24px);box-shadow:0 28px 90px rgba(0,0,0,.35);padding:30px;margin-bottom:18px}
+.profile-top{text-align:center}.avatar{width:96px;height:96px;border-radius:32px;background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple));margin:0 auto 18px}
+h1{font-size:clamp(38px,6vw,58px);letter-spacing:-.08em;margin-bottom:10px}.gradient{background:linear-gradient(135deg,#fff,#9bc3ff,#57f0ff);-webkit-background-clip:text;color:transparent}
+p{color:var(--muted);line-height:1.7}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+label{display:block;color:#dce6ff;font-weight:800;margin-bottom:8px;font-size:13px}input,select{width:100%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:white;outline:none;border-radius:18px;padding:15px;font-size:15px;margin-bottom:14px}select option{background:#0b1024;color:white}
+.btn{border:none;border-radius:999px;padding:14px 18px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101f}.status{margin-top:12px;color:#dce6ff;font-weight:700;font-size:14px}
+.bottom-nav{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);width:min(620px,92%);background:rgba(7,12,28,.82);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(25px);border-radius:28px;padding:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.nav-btn{text-align:center;border-radius:20px;padding:12px 8px;color:var(--muted);font-size:12px;font-weight:850}.nav-btn.active{color:#06101f;background:linear-gradient(135deg,var(--blue),var(--cyan)}
+@media(max-width:750px){.grid{grid-template-columns:1fr}}@media(max-width:540px){.back-btn{display:none}.card{border-radius:28px;padding:24px}.btn{width:100%}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><a href="student-dashboard.html" class="logo"><span class="logo-mark"></span><span>StudyMate AI</span></a><a href="student-dashboard.html" class="back-btn">Back</a></header>
+
+<section class="card profile-top">
+<div class="avatar"></div>
+<h1>Your <span class="gradient">Profile.</span></h1>
+<p>Manage your StudyMate AI account, role, learning level, and basic settings.</p>
+</section>
+
+<section class="grid">
+<div class="card">
+<h2>Account Details</h2><br>
+<label>Full Name</label><input id="name" value="StudyMate User">
+<label>Email</label><input id="email" value="student@email.com">
+<label>Role</label><select id="role"><option>Student</option><option>Teacher</option></select>
+<button class="btn" onclick="saveProfile()">Save Profile</button>
+<div class="status" id="status">Profile ready.</div>
+</div>
+
+<div class="card">
+<h2>Learning Settings</h2><br>
+<label>Education Level</label><select><option>Secondary School</option><option>University</option><option>Professional Exam</option></select>
+<label>Preferred Mode</label><select><option>Beginner explanation</option><option>Step-by-step solution</option><option>Exam-focused answer</option></select>
+<label>Theme</label><select><option>Premium Dark</option><option>Light Mode Later</option></select>
+<button class="btn" onclick="alert('Settings saved. Backend will store this later.')">Save Settings</button>
+</div>
+</section>
+</div>
+
+<nav class="bottom-nav">
+<a class="nav-btn" href="student-dashboard.html">Home</a><a class="nav-btn" href="join-class.html">Classes</a><a class="nav-btn" href="notifications.html">Alerts</a><a class="nav-btn" href="ai-tutor.html">AI Tutor</a><a class="nav-btn active" href="profile.html">Profile</a>
+</nav>
+
+<script>
+function saveProfile(){document.getElementById("status").textContent="Profile saved. Backend database will connect later."}
+</script>
+</body>
+</html>
