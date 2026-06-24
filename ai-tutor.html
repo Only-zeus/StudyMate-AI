@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyMate AI | AI Tutor</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+:root{
+--bg:#050816;
+--card:rgba(255,255,255,.08);
+--border:rgba(255,255,255,.13);
+--text:#ffffff;
+--muted:#9aa8c7;
+--blue:#4f8cff;
+--cyan:#35e7ff;
+--purple:#8f5bff;
+--green:#43f5b6;
+--yellow:#ffd166;
+}
+
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at 10% 0%,rgba(79,140,255,.26),transparent 34%),
+radial-gradient(circle at 90% 10%,rgba(143,91,255,.22),transparent 34%),
+radial-gradient(circle at 50% 100%,rgba(53,231,255,.12),transparent 45%),
+var(--bg);
+color:white;
+overflow-x:hidden;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+.app{
+width:min(1180px,92%);
+margin:0 auto;
+padding:24px 0 110px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:24px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:23px;
+font-weight:900;
+letter-spacing:-.04em;
+}
+
+.logo-mark{
+width:42px;
+height:42px;
+border-radius:15px;
+background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple));
+position:relative;
+}
+
+.logo-mark:after{
+content:"";
+position:absolute;
+inset:10px;
+border:2px solid rgba(255,255,255,.75);
+border-radius:9px;
+}
+
+.back-btn{
+padding:12px 18px;
+border-radius:999px;
+border:1px solid var(--border);
+background:rgba(255,255,255,.07);
+font-weight:800;
+font-size:14px;
+}
+
+.hero{
+display:grid;
+grid-template-columns:.9fr 1.1fr;
+gap:20px;
+height:calc(100vh - 150px);
+min-height:720px;
+}
+
+.sidebar,
+.chat-area{
+background:rgba(255,255,255,.075);
+border:1px solid var(--border);
+border-radius:34px;
+backdrop-filter:blur(24px);
+box-shadow:0 28px 90px rgba(0,0,0,.35);
+overflow:hidden;
+}
+
+.sidebar{
+padding:28px;
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.badge{
+display:inline-flex;
+width:max-content;
+padding:10px 15px;
+border-radius:999px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.13);
+color:#dce6ff;
+font-weight:800;
+font-size:13px;
+}
+
+h1{
+font-size:clamp(38px,6vw,56px);
+line-height:.95;
+letter-spacing:-.08em;
+}
+
+.gradient{
+background:linear-gradient(135deg,#fff,#9bc3ff,#57f0ff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+.sidebar p{
+color:var(--muted);
+line-height:1.7;
+font-size:15px;
+}
+
+.subject-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.subject-btn{
+border:none;
+border-radius:18px;
+padding:14px;
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.1);
+color:#dce6ff;
+font-weight:800;
+font-family:inherit;
+cursor:pointer;
+text-align:left;
+}
+
+.subject-btn.active{
+background:linear-gradient(135deg,rgba(79,140,255,.3),rgba(53,231,255,.13));
+border-color:rgba(53,231,255,.35);
+}
+
+.mode-box{
+display:grid;
+gap:10px;
+}
+
+.mode-box label{
+font-size:13px;
+font-weight:800;
+color:#dce6ff;
+}
+
+select{
+width:100%;
+padding:15px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.13);
+background:rgba(255,255,255,.08);
+color:white;
+outline:none;
+}
+
+select option{
+background:#0b1024;
+color:white;
+}
+
+.tip-card{
+margin-top:auto;
+padding:18px;
+border-radius:24px;
+background:rgba(255,255,255,.065);
+border:1px solid rgba(255,255,255,.1);
+}
+
+.tip-card strong{
+display:block;
+margin-bottom:8px;
+}
+
+.tip-card span{
+color:var(--muted);
+font-size:13px;
+line-height:1.6;
+}
+
+.chat-area{
+display:flex;
+flex-direction:column;
+}
+
+.chat-header{
+padding:22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid rgba(255,255,255,.09);
+}
+
+.chat-header h2{
+font-size:25px;
+letter-spacing:-.04em;
+}
+
+.status-pill{
+padding:8px 12px;
+border-radius:999px;
+background:rgba(67,245,182,.12);
+border:1px solid rgba(67,245,182,.22);
+color:var(--green);
+font-weight:900;
+font-size:12px;
+}
+
+.messages{
+flex:1;
+padding:22px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.message{
+max-width:86%;
+padding:16px 18px;
+border-radius:22px;
+line-height:1.7;
+font-size:15px;
+}
+
+.message.ai{
+background:rgba(255,255,255,.075);
+border:1px solid rgba(255,255,255,.1);
+align-self:flex-start;
+color:#dce6ff;
+}
+
+.message.user{
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+color:#06101f;
+align-self:flex-end;
+font-weight:750;
+}
+
+.quick-prompts{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:4px;
+}
+
+.prompt{
+border:none;
+border-radius:18px;
+padding:14px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.1);
+color:#dce6ff;
+font-weight:800;
+text-align:left;
+cursor:pointer;
+}
+
+.composer{
+padding:18px;
+border-top:1px solid rgba(255,255,255,.09);
+display:grid;
+grid-template-columns:1fr auto;
+gap:12px;
+}
+
+textarea{
+width:100%;
+min-height:58px;
+max-height:150px;
+resize:none;
+border:1px solid rgba(255,255,255,.13);
+background:rgba(255,255,255,.08);
+color:white;
+outline:none;
+border-radius:22px;
+padding:16px;
+font-size:15px;
+line-height:1.5;
+font-family:inherit;
+}
+
+textarea::placeholder{
+color:rgba(167,176,197,.72);
+}
+
+.send-btn{
+border:none;
+border-radius:22px;
+padding:0 24px;
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+color:#06101f;
+font-weight:900;
+cursor:pointer;
+font-family:inherit;
+}
+
+@media(max-width:920px){
+  .hero{
+    grid-template-columns:1fr;
+    height:auto;
+    min-height:auto;
+  }
+
+  .chat-area{
+    min-height:720px;
+  }
+
+  .subject-grid,
+  .quick-prompts{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:540px){
+  .app{width:92%}
+  .sidebar,.chat-area{border-radius:28px}
+  .back-btn{display:none}
+  .composer{grid-template-columns:1fr}
+  .send-btn{min-height:54px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <a href="index.html" class="logo">
+    <span class="logo-mark"></span>
+    <span>StudyMate AI</span>
+  </a>
+
+  <a href="student-dashboard.html" class="back-btn">Back to dashboard</a>
+</header>
+
+<section class="hero">
+
+<aside class="sidebar">
+  <div class="badge">AI Tutor</div>
+
+  <h1>
+    Ask anything.
+    <span class="gradient">Learn clearly.</span>
+  </h1>
+
+  <p>
+    StudyMate AI helps students understand science, arts, commercial subjects,
+    mathematics, assignments, summaries, and exam preparation with clear explanations.
+  </p>
+
+  <div class="subject-grid">
+    <button class="subject-btn active" onclick="setSubject('Science')">Science</button>
+    <button class="subject-btn" onclick="setSubject('Arts')">Arts</button>
+    <button class="subject-btn" onclick="setSubject('Commercial')">Commercial</button>
+    <button class="subject-btn" onclick="setSubject('Mathematics')">Mathematics</button>
+  </div>
+
+  <div class="mode-box">
+    <label>Learning mode</label>
+    <select id="learningMode">
+      <option>Beginner explanation</option>
+      <option>Step-by-step solution</option>
+      <option>Exam-focused answer</option>
+      <option>Assignment help</option>
+      <option>Summary mode</option>
+    </select>
+  </div>
+
+  <div class="tip-card">
+    <strong>How StudyMate answers</strong>
+    <span>
+      It should teach, explain, solve step-by-step, show methods,
+      and help students understand instead of just giving final answers.
+    </span>
+  </div>
+</aside>
+
+<main class="chat-area">
+
+  <div class="chat-header">
+    <h2 id="chatTitle">Science Tutor</h2>
+    <div class="status-pill">Ready</div>
+  </div>
+
+  <div class="messages" id="messages">
+
+    <div class="message ai">
+      Welcome to StudyMate AI Tutor. Ask any education question across science,
+      arts, commercial courses, mathematics, assignments, or exam preparation.
+    </div>
+
+    <div class="quick-prompts">
+      <button class="prompt" onclick="usePrompt('Explain photosynthesis in a simple way')">
+        Explain photosynthesis in a simple way
+      </button>
+
+      <button class="prompt" onclick="usePrompt('Solve 2x squared plus 7x plus 3 equals 0 step by step')">
+        Solve a quadratic equation step by step
+      </button>
+
+      <button class="prompt" onclick="usePrompt('Summarize Newton laws of motion for exam revision')">
+        Summarize Newton laws for exams
+      </button>
+
+      <button class="prompt" onclick="usePrompt('Explain demand and supply in Economics')">
+        Explain demand and supply in Economics
+      </button>
+    </div>
+
+  </div>
+
+  <div class="composer">
+    <textarea id="userInput" placeholder="Ask StudyMate AI your question..."></textarea>
+    <button class="send-btn" onclick="sendMessage()">Send</button>
+  </div>
+
+</main>
+
+</section>
+
+</div>
+
+<script>
+let currentSubject = "Science";
+
+function setSubject(subject){
+  currentSubject = subject;
+
+  document.querySelectorAll(".subject-btn").forEach(btn => {
+    btn.classList.remove("active");
+    if(btn.textContent.trim() === subject){
+      btn.classList.add("active");
+    }
+  });
+
+  document.getElementById("chatTitle").textContent = subject + " Tutor";
+}
+
+function usePrompt(text){
+  document.getElementById("userInput").value = text;
+}
+
+function addMessage(text, type){
+  const messages = document.getElementById("messages");
+  const div = document.createElement("div");
+  div.className = "message " + type;
+  div.innerHTML = text;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function generateTutorReply(question){
+  const mode = document.getElementById("learningMode").value;
+
+  return `
+    <strong>StudyMate ${currentSubject} Tutor</strong><br><br>
+    <strong>Question:</strong> ${question}<br><br>
+    <strong>Mode:</strong> ${mode}<br><br>
+    Here is how I would help you understand it:<br><br>
+    1. I will first explain the topic in simple language.<br>
+    2. I will break the answer into clear steps.<br>
+    3. I will show the method, not just the final answer.<br>
+    4. I will add exam-focused points where necessary.<br>
+    5. I will give you a short practice question to test your understanding.<br><br>
+    Backend AI connection will be added later with Groq or another AI model.
+  `;
+}
+
+function sendMessage(){
+  const input = document.getElementById("userInput");
+  const question = input.value.trim();
+
+  if(!question){
+    return;
+  }
+
+  addMessage(question, "user");
+  input.value = "";
+
+  setTimeout(() => {
+    addMessage(generateTutorReply(question), "ai");
+  }, 600);
+}
+
+document.getElementById("userInput").addEventListener("keydown", function(e){
+  if(e.key === "Enter" && !e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+</script>
+
+</body>
+</html>
