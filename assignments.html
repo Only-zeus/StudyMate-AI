@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyMate AI | Student Assignments</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+
+:root{
+--bg:#050816;
+--border:rgba(255,255,255,.13);
+--muted:#9aa8c7;
+--blue:#4f8cff;
+--cyan:#35e7ff;
+--purple:#8f5bff;
+--green:#43f5b6;
+--yellow:#ffd166;
+}
+
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at 10% 0%,rgba(79,140,255,.26),transparent 34%),
+radial-gradient(circle at 90% 10%,rgba(143,91,255,.22),transparent 34%),
+#050816;
+color:white;
+}
+
+a{text-decoration:none;color:inherit}
+
+.app{
+width:min(1180px,92%);
+margin:0 auto;
+padding:24px 0 110px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:28px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:23px;
+font-weight:900;
+}
+
+.logo-mark{
+width:42px;
+height:42px;
+border-radius:15px;
+background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple));
+}
+
+.back-btn{
+padding:12px 18px;
+border-radius:999px;
+border:1px solid var(--border);
+background:rgba(255,255,255,.07);
+font-weight:800;
+}
+
+.hero,.card{
+background:rgba(255,255,255,.075);
+border:1px solid var(--border);
+border-radius:34px;
+backdrop-filter:blur(24px);
+box-shadow:0 28px 90px rgba(0,0,0,.35);
+}
+
+.hero{
+padding:34px;
+margin-bottom:20px;
+}
+
+.badge{
+display:inline-flex;
+padding:10px 15px;
+border-radius:999px;
+background:rgba(255,255,255,.08);
+font-weight:800;
+font-size:13px;
+margin-bottom:20px;
+}
+
+h1{
+font-size:clamp(40px,6vw,64px);
+line-height:.95;
+letter-spacing:-.08em;
+margin-bottom:16px;
+}
+
+.gradient{
+background:linear-gradient(135deg,#fff,#9bc3ff,#57f0ff);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+p{color:var(--muted);line-height:1.7}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
+.card{
+padding:26px;
+}
+
+.card h2{
+font-size:28px;
+letter-spacing:-.05em;
+margin-bottom:10px;
+}
+
+.assignment{
+margin-top:16px;
+padding:18px;
+border-radius:24px;
+background:rgba(255,255,255,.065);
+border:1px solid rgba(255,255,255,.1);
+}
+
+.assignment strong{
+display:block;
+font-size:18px;
+margin-bottom:8px;
+}
+
+.assignment span{
+display:block;
+color:var(--muted);
+font-size:13px;
+line-height:1.6;
+margin-bottom:14px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.pill{
+padding:8px 12px;
+border-radius:999px;
+font-size:12px;
+font-weight:900;
+background:rgba(255,209,102,.12);
+border:1px solid rgba(255,209,102,.2);
+color:var(--yellow);
+}
+
+.pill.done{
+background:rgba(67,245,182,.12);
+border-color:rgba(67,245,182,.2);
+color:var(--green);
+}
+
+.btn{
+border:none;
+border-radius:999px;
+padding:13px 18px;
+font-weight:900;
+cursor:pointer;
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+color:#06101f;
+}
+
+.btn.ghost{
+background:rgba(255,255,255,.08);
+border:1px solid var(--border);
+color:white;
+}
+
+input,textarea{
+width:100%;
+border:1px solid rgba(255,255,255,.14);
+background:rgba(255,255,255,.08);
+color:white;
+outline:none;
+border-radius:18px;
+padding:15px;
+font-size:15px;
+font-family:inherit;
+margin-top:12px;
+}
+
+textarea{
+min-height:130px;
+resize:none;
+line-height:1.6;
+}
+
+.status{
+margin-top:12px;
+font-size:14px;
+color:#dce6ff;
+font-weight:700;
+}
+
+.bottom-nav{
+position:fixed;
+left:50%;
+bottom:18px;
+transform:translateX(-50%);
+width:min(620px,92%);
+background:rgba(7,12,28,.82);
+border:1px solid rgba(255,255,255,.14);
+backdrop-filter:blur(25px);
+border-radius:28px;
+padding:12px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+}
+
+.nav-btn{
+text-align:center;
+border-radius:20px;
+padding:12px 8px;
+color:var(--muted);
+font-size:12px;
+font-weight:850;
+}
+
+.nav-btn.active{
+color:#06101f;
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+}
+
+@media(max-width:850px){
+.grid{grid-template-columns:1fr}
+}
+
+@media(max-width:540px){
+.back-btn{display:none}
+.hero,.card{border-radius:28px;padding:24px}
+.row{display:grid}
+.btn{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<a href="student-dashboard.html" class="logo">
+<span class="logo-mark"></span>
+<span>StudyMate AI</span>
+</a>
+
+<a href="student-dashboard.html" class="back-btn">Back to dashboard</a>
+</header>
+
+<section class="hero">
+<div class="badge">Student Assignments</div>
+<h1>
+Submit your work
+<span class="gradient">with ease.</span>
+</h1>
+<p>
+View teacher assignments, read instructions, upload your work, submit before deadline,
+and receive feedback after grading.
+</p>
+</section>
+
+<section class="grid">
+
+<div class="card">
+<h2>Available Assignments</h2>
+<p>Select an assignment and submit your response.</p>
+
+<div class="assignment">
+<strong>Quadratic Equations</strong>
+<span>Class: Mathematics Revision. Deadline: Friday, 11:59 PM. Solve questions 1 to 10.</span>
+<div class="row">
+<span class="pill">Pending</span>
+<button class="btn ghost" onclick="selectAssignment('Quadratic Equations')">Open</button>
+</div>
+</div>
+
+<div class="assignment">
+<strong>Wave Motion</strong>
+<span>Class: Physics SS2. Deadline: Monday, 8:00 PM. Explain wave speed and frequency.</span>
+<div class="row">
+<span class="pill">Pending</span>
+<button class="btn ghost" onclick="selectAssignment('Wave Motion')">Open</button>
+</div>
+</div>
+
+<div class="assignment">
+<strong>Demand and Supply</strong>
+<span>Class: Economics. Deadline: Wednesday, 5:00 PM. Explain market equilibrium.</span>
+<div class="row">
+<span class="pill done">Submitted</span>
+<button class="btn ghost" onclick="selectAssignment('Demand and Supply')">View</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2 id="selectedTitle">Submit Assignment</h2>
+<p id="selectedInfo">Choose an assignment from the left to begin.</p>
+
+<input type="file" id="fileInput">
+
+<textarea id="answerText" placeholder="Write your answer or add a short note to your teacher..."></textarea>
+
+<button class="btn" onclick="submitAssignment()">Submit assignment</button>
+
+<div class="status" id="submitStatus">No assignment selected yet.</div>
+</div>
+
+</section>
+
+</div>
+
+<nav class="bottom-nav">
+<a class="nav-btn" href="student-dashboard.html">Home</a>
+<a class="nav-btn" href="student-dashboard.html#join">Classes</a>
+<a class="nav-btn active" href="assignments.html">Tasks</a>
+<a class="nav-btn" href="downloads.html">Files</a>
+<a class="nav-btn" href="ai-tutor.html">AI Tutor</a>
+</nav>
+
+<script>
+let currentAssignment = "";
+
+function selectAssignment(title){
+currentAssignment = title;
+document.getElementById("selectedTitle").textContent = title;
+document.getElementById("selectedInfo").textContent = "Upload your file or type your answer, then submit.";
+document.getElementById("submitStatus").textContent = "Ready to submit: " + title;
+}
+
+function submitAssignment(){
+const status = document.getElementById("submitStatus");
+const answer = document.getElementById("answerText").value.trim();
+const file = document.getElementById("fileInput").files[0];
+
+if(!currentAssignment){
+status.textContent = "Please select an assignment first.";
+return;
+}
+
+if(!answer && !file){
+status.textContent = "Please type an answer or upload a file.";
+return;
+}
+
+status.textContent = currentAssignment + " submitted successfully. Backend storage will be connected later.";
+
+document.getElementById("answerText").value = "";
+document.getElementById("fileInput").value = "";
+}
+</script>
+
+</body>
+</html>
