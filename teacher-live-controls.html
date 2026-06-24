@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyMate AI | Teacher Live Controls</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:root{--bg:#050816;--border:rgba(255,255,255,.13);--muted:#9aa8c7;--blue:#4f8cff;--cyan:#35e7ff;--purple:#8f5bff;--green:#43f5b6;--red:#ff6b8a;--yellow:#ffd166}
+body{min-height:100vh;background:radial-gradient(circle at 10% 0%,rgba(79,140,255,.26),transparent 34%),radial-gradient(circle at 90% 10%,rgba(143,91,255,.22),transparent 34%),#050816;color:white}
+a{text-decoration:none;color:inherit}
+.app{width:min(1180px,92%);margin:0 auto;padding:24px 0 110px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.logo{display:flex;align-items:center;gap:12px;font-size:23px;font-weight:900}
+.logo-mark{width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple))}
+.back-btn{padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.07);font-weight:800}
+.hero,.card{background:rgba(255,255,255,.075);border:1px solid var(--border);border-radius:34px;backdrop-filter:blur(24px);box-shadow:0 28px 90px rgba(0,0,0,.35)}
+.hero{padding:34px;margin-bottom:20px}
+.badge{display:inline-flex;padding:10px 15px;border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:13px;margin-bottom:20px}
+h1{font-size:clamp(40px,6vw,64px);line-height:.95;letter-spacing:-.08em;margin-bottom:16px}
+.gradient{background:linear-gradient(135deg,#fff,#9bc3ff,#57f0ff);-webkit-background-clip:text;color:transparent}
+p{color:var(--muted);line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{padding:26px}
+.card h2{font-size:26px;margin-bottom:10px;letter-spacing:-.05em}
+.control{margin-top:16px;padding:18px;border-radius:24px;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.1)}
+.control strong{display:block;margin-bottom:8px}
+.control span{display:block;color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:14px}
+.btn{border:none;border-radius:999px;padding:13px 18px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101f}
+.btn.red{background:linear-gradient(135deg,#ff6b8a,#ff9aa8);color:white}
+.btn.ghost{background:rgba(255,255,255,.08);border:1px solid var(--border);color:white}
+.status{margin-top:12px;color:#dce6ff;font-weight:700;font-size:14px}
+.bottom-nav{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);width:min(620px,92%);background:rgba(7,12,28,.82);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(25px);border-radius:28px;padding:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.nav-btn{text-align:center;border-radius:20px;padding:12px 8px;color:var(--muted);font-size:12px;font-weight:850}
+.nav-btn.active{color:#06101f;background:linear-gradient(135deg,var(--blue),var(--cyan)}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+@media(max-width:540px){.back-btn{display:none}.hero,.card{border-radius:28px;padding:24px}.btn{width:100%}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<a href="teacher-dashboard.html" class="logo"><span class="logo-mark"></span><span>StudyMate AI</span></a>
+<a href="teacher-dashboard.html" class="back-btn">Back to dashboard</a>
+</header>
+
+<section class="hero">
+<div class="badge">Teacher Live Controls</div>
+<h1>Control your <span class="gradient">live classroom.</span></h1>
+<p>Start lessons, control screen sharing, manage attendance, record sessions, and end live classes from one premium control center.</p>
+<div class="status" id="mainStatus">Classroom is ready.</div>
+</section>
+
+<section class="grid">
+<div class="card">
+<h2>Class Session</h2>
+<div class="control"><strong>Start Live Class</strong><span>Begin the classroom session for students.</span><button class="btn" onclick="setStatus('Live class started.')">Start Class</button></div>
+<div class="control"><strong>End Class</strong><span>End the session for all participants.</span><button class="btn red" onclick="setStatus('Live class ended.')">End Class</button></div>
+</div>
+
+<div class="card">
+<h2>Teaching Tools</h2>
+<div class="control"><strong>Screen Sharing</strong><span>Share your screen, browser tab, or teaching slide.</span><button class="btn" onclick="setStatus('Screen sharing activated.')">Share Screen</button></div>
+<div class="control"><strong>Whiteboard</strong><span>Open board for formulas, diagrams, and explanations.</span><button class="btn ghost" onclick="setStatus('Whiteboard opened.')">Open Whiteboard</button></div>
+</div>
+
+<div class="card">
+<h2>Class Management</h2>
+<div class="control"><strong>Recording</strong><span>Record the lesson for students to watch later.</span><button class="btn" onclick="setStatus('Class recording started.')">Start Recording</button></div>
+<div class="control"><strong>Attendance</strong><span>Mark students present automatically or manually.</span><button class="btn ghost" onclick="location.href='attendance.html'">View Attendance</button></div>
+</div>
+</section>
+</div>
+
+<nav class="bottom-nav">
+<a class="nav-btn" href="teacher-dashboard.html">Home</a>
+<a class="nav-btn" href="materials.html">Files</a>
+<a class="nav-btn" href="assignment-manager.html">Tasks</a>
+<a class="nav-btn active" href="teacher-live-controls.html">Live</a>
+<a class="nav-btn" href="profile.html">Profile</a>
+</nav>
+
+<script>
+function setStatus(text){document.getElementById("mainStatus").textContent=text;}
+</script>
+</body>
+</html>
