@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyMate AI | Downloads</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+
+:root{
+--bg:#050816;
+--border:rgba(255,255,255,.13);
+--muted:#9aa8c7;
+--blue:#4f8cff;
+--cyan:#35e7ff;
+--purple:#8f5bff;
+--green:#43f5b6;
+--yellow:#ffd166;
+}
+
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at 10% 0%,rgba(79,140,255,.26),transparent 34%),
+radial-gradient(circle at 90% 10%,rgba(143,91,255,.22),transparent 34%),
+#050816;
+color:white;
+}
+
+a{text-decoration:none;color:inherit}
+
+.app{
+width:min(1180px,92%);
+margin:0 auto;
+padding:24px 0 110px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:28px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:23px;
+font-weight:900;
+}
+
+.logo-mark{
+width:42px;
+height:42px;
+border-radius:15px;
+background:linear-gradient(135deg,var(--blue),var(--cyan),var(--purple));
+}
+
+.back-btn{
+padding:12px 18px;
+border-radius:999px;
+border:1px solid var(--border);
+background:rgba(255,255,255,.07);
+font-weight:800;
+}
+
+.hero,.card{
+background:rgba(255,255,255,.075);
+border:1px solid var(--border);
+border-radius:34px;
+backdrop-filter:blur(24px);
+box-shadow:0 28px 90px rgba(0,0,0,.35);
+}
+
+.hero{
+padding:34px;
+margin-bottom:20px;
+}
+
+.badge{
+display:inline-flex;
+padding:10px 15px;
+border-radius:999px;
+background:rgba(255,255,255,.08);
+font-weight:800;
+font-size:13px;
+margin-bottom:20px;
+}
+
+h1{
+font-size:clamp(40px,6vw,64px);
+line-height:.95;
+letter-spacing:-.08em;
+margin-bottom:16px;
+}
+
+.gradient{
+background:linear-gradient(135deg,#fff,#9bc3ff,#57f0ff);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+p{color:var(--muted);line-height:1.7}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.card{
+padding:24px;
+}
+
+.card strong{
+display:block;
+font-size:19px;
+margin-bottom:9px;
+}
+
+.card span{
+display:block;
+color:var(--muted);
+font-size:13px;
+line-height:1.6;
+margin-bottom:18px;
+}
+
+.file-type{
+width:52px;
+height:52px;
+border-radius:18px;
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+margin-bottom:18px;
+position:relative;
+}
+
+.file-type:after{
+content:"";
+position:absolute;
+inset:14px;
+border:2px solid rgba(255,255,255,.8);
+border-radius:7px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.pill{
+padding:8px 12px;
+border-radius:999px;
+font-size:12px;
+font-weight:900;
+background:rgba(67,245,182,.12);
+border:1px solid rgba(67,245,182,.2);
+color:var(--green);
+}
+
+.btn{
+border:none;
+border-radius:999px;
+padding:13px 18px;
+font-weight:900;
+cursor:pointer;
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+color:#06101f;
+}
+
+.search-box{
+display:grid;
+grid-template-columns:1fr auto;
+gap:12px;
+margin-top:24px;
+}
+
+input{
+width:100%;
+border:1px solid rgba(255,255,255,.14);
+background:rgba(255,255,255,.08);
+color:white;
+outline:none;
+border-radius:18px;
+padding:15px;
+font-size:15px;
+}
+
+input::placeholder{color:rgba(167,176,197,.75)}
+
+.status{
+margin-top:15px;
+color:#dce6ff;
+font-weight:700;
+font-size:14px;
+}
+
+.bottom-nav{
+position:fixed;
+left:50%;
+bottom:18px;
+transform:translateX(-50%);
+width:min(620px,92%);
+background:rgba(7,12,28,.82);
+border:1px solid rgba(255,255,255,.14);
+backdrop-filter:blur(25px);
+border-radius:28px;
+padding:12px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+}
+
+.nav-btn{
+text-align:center;
+border-radius:20px;
+padding:12px 8px;
+color:var(--muted);
+font-size:12px;
+font-weight:850;
+}
+
+.nav-btn.active{
+color:#06101f;
+background:linear-gradient(135deg,var(--blue),var(--cyan));
+}
+
+@media(max-width:900px){
+.grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:560px){
+.grid,.search-box{grid-template-columns:1fr}
+.back-btn{display:none}
+.hero,.card{border-radius:28px}
+.btn{width:100%}
+.row{display:grid}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<a href="student-dashboard.html" class="logo">
+<span class="logo-mark"></span>
+<span>StudyMate AI</span>
+</a>
+
+<a href="student-dashboard.html" class="back-btn">Back to dashboard</a>
+</header>
+
+<section class="hero">
+<div class="badge">Student Downloads</div>
+
+<h1>
+Access your
+<span class="gradient">learning materials.</span>
+</h1>
+
+<p>
+Download notes, PDFs, slides, guides, and classroom resources uploaded by your teachers.
+Everything you need for revision stays in one clean place.
+</p>
+
+<div class="search-box">
+<input id="searchInput" placeholder="Search materials by title, subject, or class...">
+<button class="btn" onclick="searchMaterials()">Search</button>
+</div>
+
+<div class="status" id="searchStatus">Showing all available materials.</div>
+</section>
+
+<section class="grid" id="materialsGrid">
+
+<div class="card material-card" data-title="physics wave notes physics ss2">
+<div class="file-type"></div>
+<strong>Physics Wave Notes</strong>
+<span>Class: Physics SS2. Type: PDF Notes. Covers wave speed, frequency, wavelength, and sound energy.</span>
+<div class="row">
+<span class="pill">PDF</span>
+<button class="btn" onclick="downloadFile('Physics Wave Notes')">Download</button>
+</div>
+</div>
+
+<div class="card material-card" data-title="mathematics revision slides quadratic equations">
+<div class="file-type"></div>
+<strong>Mathematics Revision Slides</strong>
+<span>Class: Mathematics Revision. Type: Slides. Covers factorization, formula method, and practice examples.</span>
+<div class="row">
+<span class="pill">Slides</span>
+<button class="btn" onclick="downloadFile('Mathematics Revision Slides')">Download</button>
+</div>
+</div>
+
+<div class="card material-card" data-title="chemistry assignment guide chemistry class">
+<div class="file-type"></div>
+<strong>Chemistry Assignment Guide</strong>
+<span>Class: Chemistry Class. Type: Document. Helps students prepare and submit chemistry assignments.</span>
+<div class="row">
+<span class="pill">Document</span>
+<button class="btn" onclick="downloadFile('Chemistry Assignment Guide')">Download</button>
+</div>
+</div>
+
+<div class="card material-card" data-title="economics demand and supply economics">
+<div class="file-type"></div>
+<strong>Economics Demand and Supply</strong>
+<span>Class: Economics. Type: PDF Notes. Explains demand, supply, price changes, and market equilibrium.</span>
+<div class="row">
+<span class="pill">PDF</span>
+<button class="btn" onclick="downloadFile('Economics Demand and Supply')">Download</button>
+</div>
+</div>
+
+<div class="card material-card" data-title="biology photosynthesis biology science">
+<div class="file-type"></div>
+<strong>Biology Photosynthesis Notes</strong>
+<span>Class: Biology. Type: PDF Notes. Explains photosynthesis, chlorophyll, sunlight, and glucose formation.</span>
+<div class="row">
+<span class="pill">PDF</span>
+<button class="btn" onclick="downloadFile('Biology Photosynthesis Notes')">Download</button>
+</div>
+</div>
+
+<div class="card material-card" data-title="english essay writing english arts">
+<div class="file-type"></div>
+<strong>English Essay Writing Guide</strong>
+<span>Class: English. Type: Document. Helps students structure essays, introductions, body, and conclusion.</span>
+<div class="row">
+<span class="pill">Guide</span>
+<button class="btn" onclick="downloadFile('English Essay Writing Guide')">Download</button>
+</div>
+</div>
+
+</section>
+
+</div>
+
+<nav class="bottom-nav">
+<a class="nav-btn" href="student-dashboard.html">Home</a>
+<a class="nav-btn" href="student-dashboard.html#join">Classes</a>
+<a class="nav-btn" href="assignments.html">Tasks</a>
+<a class="nav-btn active" href="downloads.html">Files</a>
+<a class="nav-btn" href="ai-tutor.html">AI Tutor</a>
+</nav>
+
+<script>
+function searchMaterials(){
+const query=document.getElementById("searchInput").value.toLowerCase().trim();
+const cards=document.querySelectorAll(".material-card");
+const status=document.getElementById("searchStatus");
+let count=0;
+
+cards.forEach(card=>{
+const title=card.dataset.title;
+if(!query || title.includes(query)){
+card.style.display="block";
+count++;
+}else{
+card.style.display="none";
+}
+});
+
+status.textContent=count+" material(s) found.";
+}
+
+function downloadFile(name){
+alert(name+" download will activate when backend file storage is connected.");
+}
+</script>
+
+</body>
+</html>
